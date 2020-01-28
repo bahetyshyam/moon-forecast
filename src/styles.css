@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+.nav {
+    color: black !important;
+}
+
+.theme-color {
+    background-color: #40c4ff;
+    color : black;
+}
+.header-content {
+    font-family: Roboto;
+    text-align: center;
+    font-weight: 400;
+    font-size: 30px;
+}
+
+.select-component {
+    /* width: 50%; */
+    text-align: center;
+}
