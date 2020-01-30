@@ -20,16 +20,41 @@ class App extends React.Component {
                 },
                 {
                     "id": 2,
-                    "name": "New Delhi",
-                    "lat" : 28.7041,
-                    "long" : 77.1025
+                    "name": "Dergaon",
+                    "lat" : 26.6969,
+                    "long" : 93.9853
+                },
+                {
+                    "id": 3,
+                    "name": "Bongaigaon",
+                    "lat": 26.5030,
+                    "long": 90.5536
+                },
+                {
+                    "id": 4,
+                    "name": "Dhola",
+                    "lat": 27.8028,
+                    "long": 95.6762,
+                },
+                {
+                    "id": 5,
+                    "name": "Golaghat",
+                    "lat": 26.5239,
+                    "long": 93.9623
+                },
+                {
+                    "id": 6,
+                    "name": "Nazira",
+                    "lat": 26.9007,
+                    "long": 94.7226
                 }
             ],
-            selectedCity : undefined,
             moonrise : '',
             moonset : '',
         }
     }
+    
+    mapSet = new Map();
 
     componentDidMount = async () => {
         let initialApiData;
@@ -38,12 +63,20 @@ class App extends React.Component {
         .then(response => response.json())
         .then(result => { initialApiData = result})
         .catch(error => error);
+        this.mapSet.set("Bangalore", initialApiData);
+        console.log(this.mapSet);
         this.setState({moonrise : initialApiData.moonrise, moonset: initialApiData.moonset})
     }
 
     onSearchChange = (e) => {
+        if(this.mapSet.has(e.target.value)) {
+            this.setState({moonrise : this.mapSet.get(e.target.value).moonrise, moonset: this.mapSet.get(e.target.value).moonset})
+        }
+        else {
+            this.callApi(e.target.value);
+        }
         // this.setState({selectedCity : e.target.value, inputChanged : true});
-        this.callApi(e.target.value);
+        // 
     }
 
     fetchLocation = (selectedCity) => {
@@ -63,6 +96,7 @@ class App extends React.Component {
         .then(response => response.json())
         .then(result => { apiData = result})
         .catch(error => error);
+        this.mapSet.set(selectedCity, apiData);
         this.setState({moonrise : apiData.moonrise, moonset: apiData.moonset})
         console.log(apiData.moonrise);
         console.log(this.state);
