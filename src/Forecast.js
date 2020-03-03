@@ -3,10 +3,6 @@ import { Container} from '@material-ui/core';
 
 
 class Forecast extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <Container>
